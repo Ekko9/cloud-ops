@@ -1,6 +1,0 @@
-- name: "Update nginx"
-  shell: |
-      cd "{{ apps[service].dest }}/{{ service }}"
-      sudo unzip -d "{{ apps[service].dir }}/{{ apps[service].name }}/" csdp.zip
-  register: update_status
-  failed_when: update_status.rc != 0
