@@ -1,0 +1,13 @@
+- name: "禁止root登陆"
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: "修改文件"
+    lineinfile:
+          dest: /etc/ssh/sshd_config
+          backup: yes
+          regexp: "^PermitRootLogin "
+          line: "PermitRootLogin no"
+    ignore_errors: false
+          
+

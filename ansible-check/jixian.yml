@@ -1,0 +1,8 @@
+- name: jixian check
+  hosts: "{{ host }}"
+  gather_facts: false
+  tasks: 
+  - name: start jixian check
+    shell: |
+      cd /home/common/jixian
+      sh 36c221be-6ab2-ef53-1589-fe16877914f4.sh "{{ host }}" root "7x%^!zGA&\l|h'XK" null

@@ -1,0 +1,11 @@
+- name: "Update csdp nginx"
+  hosts: "{{ service }}"
+  gather_facts: false
+  vars_files:
+    - apps.yml
+  roles:
+    - backup_nginx
+    - stop_nginx
+    - update_nginx
+    - start_nginx
+    - check_port

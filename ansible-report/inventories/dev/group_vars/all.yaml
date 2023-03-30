@@ -1,0 +1,16 @@
+---
+# defaults file for ctsi ops
+
+###==========必须修改==========###
+# 新添加的管理用户的用户名和密码
+ops_add_user:
+  - { name: "btops", password: "btops@2021" }
+  - { name: "btops2", password: "btops@2021" }    
+
+# 变更密码的用户的用户名和密码
+ops_chpass_user:
+  - { name: "btops", password: "btops@2021!" }
+  - { name: "btops2", password: "btops@2021!" }
+
+# 删除用户的用户名
+ops_del_user: ['btops', 'btops2']

@@ -1,0 +1,11 @@
+- name: "Update csdp nginx"
+  hosts: "{{ service }}"
+  gather_facts: false
+  vars_files:
+    - apps.yml
+  roles:
+    - { role: backup_nginx, tags: ["backup"] }
+    #- { role: stop_nginx, tags: ["stopapp"] }
+    #- { role: update_nginx, tags: ["updateapp"] }
+    #- { role: start_nginx, tags: ["startapp"] }
+    - { role: check_port, tags: ["check"] }

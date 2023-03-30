@@ -1,0 +1,16 @@
+---
+# Linux服务器安全基线设置
+# 一定要最后执行该文件内的任务!!!
+
+- name: 服务器安全基线.
+  hosts: all
+  gather_facts: false
+  tasks:
+    ### 一定要最后执行!!!
+    - name: 检查重要文件属性设置(19)
+      shell: |
+        chattr +i /etc/gshadow
+        chattr +i /etc/shadow
+        chattr +i /etc/group
+        chattr +i /etc/passwd
+      tags: b19

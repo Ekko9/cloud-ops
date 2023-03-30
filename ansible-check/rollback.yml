@@ -1,0 +1,7 @@
+- name: "Rollback {{ service }}"
+  hosts: "{{ service }}"
+  gather_facts: false
+  vars_files:
+    - apps.yml
+  roles:
+    - rollback_service

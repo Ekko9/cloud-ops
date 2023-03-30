@@ -1,0 +1,4 @@
+
+[service]
+service1      ansible_ssh_host=       ansible_ssh_user=        ansible_ssh_pass=""
+

@@ -1,0 +1,17 @@
+- name: "Backups {{ service }} app"
+  shell: |
+      backup=$(ls "{{ apps[service].dir }}" | grep "{{ apps[service].name }}.{{ version }}.bak")
+      if test -z "${backup}"; then
+         cp -r "{{ apps[service].dir }}/{{ apps[service].name }}" "{{ apps[service].dir }}/{{ apps[service].name }}.{{ version }}.bak"
+      fi
+      ls "{{ apps[service].dir }}" | grep "{{ apps[service].name }}.{{ version }}.bak"
+      cd "{{ apps[service].dir }}/{{ apps[service].name }}.{{ version }}.bak/bin"
+      rm -rf logs
+  register: backups_status
+  failed_when: backups_status.rc != 0
+
+- name: "Print {{ service }} Backups result"
+  debug:
+    msg: "{{ backups_status.stdout }}"
+  when: backups_status.stdout != ""
+  

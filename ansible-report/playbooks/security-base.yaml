@@ -1,0 +1,91 @@
+---
+# Linux服务器安全基线设置
+
+- name: 服务器安全基线.
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: 检查口令最小长度(3)-在/etc/login.defs中设置口令最小长度
+      lineinfile:
+        path: /etc/login.defs
+        regexp: '^PASS_MIN_LEN'
+        line: 'PASS_MIN_LEN    8'
+        backup: yes
+      tags: lm3
+
+    - name: 检查是否设置口令生存周期(1)-检查口令生存周期
+      lineinfile:
+        path: /etc/login.defs
+        regexp: '^PASS_MAX_DAYS'
+        line: 'PASS_MAX_DAYS   90'
+        backup: yes
+      tags: lm1
+
+    - name: 检查设备密码复杂度策略(11)
+      lineinfile:
+        path: /etc/pam.d/system-auth
+        regexp: 'password    requisite     pam_cracklib.so'
+        insertafter: '^password    requisite     pam_pwquality.so'
+        line: 'password    requisite     pam_cracklib.so try_first_pass retry=3 minlen=8 minclass=3 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1'
+        backup: yes
+      tags: lm11
+
+    # 有bug待调整
+    - name: 检查是否限制用户su到root(10)-检查是否使用PAM认证模块禁止wheel组之外的用户su为root
+      lineinfile:
+        path: /etc/pam.d/su
+        regexp: 'auth           required        pam_wheel.so group=wheel'
+        insertbefore: '^auth            substack        system-auth'
+        line: 'auth           required        pam_wheel.so group=wheel'
+        backup: yes
+      tags: lm10
+
+    - name: 检查是否设置文件与目录缺省权限(7)-检查文件/etc/profile中umask设置-(1)
+      lineinfile:
+        path: /etc/profile
+        regexp: 'umask 022'
+        line: '    umask 027'
+        backup: yes
+        backrefs: yes
+      tags: lm7
+
+    - name: 检查是否设置文件与目录缺省权限(7)-检查文件/etc/profile中umask设置-(2)
+      lineinfile:
+        path: /etc/profile
+        regexp: 'umask 002'
+        line: '    umask 027'
+        backup: yes
+        backrefs: yes
+      tags: lm7
+
+    - name: 检查是否设置命令行界面超时退出(6)-检查命令行界面超时时间
+      lineinfile:
+        path: /etc/profile
+        regexp: '^export TMOUT='
+        line: 'export TMOUT=300'
+        backup: yes
+      tags: lm6
+
+    - name: 检查是否启用syslog日志审计(21)-检查是否启用syslog日志审计
+      lineinfile:
+        path: /etc/rsyslog.conf
+        regexp: '^authpriv'
+        line: 'authpriv.* /var/log/secure'
+        backup: yes
+      when:
+        - ansible_distribution == "CentOS"
+        - ansible_distribution_major_version |int == 6 or ansible_distribution_major_version |int == 7
+      tags: lm21
+
+    - name: 检查是否配置远程日志功能(27)-rsyslog是否配置远程日志功能
+      shell: |
+        echo "*.* @192.168.0.1:514" >> /etc/rsyslog.conf
+      args:
+        removes: /etc/rsyslog.conf
+      tags: lm15
+
+    - name: 检查是否修改系统banner(33)-应删除系统banner信息，避免泄漏操作系统泄漏
+      shell: |
+        mv /etc/issue /etc/issue.bak 
+        mv /etc/issue.net /etc/issue.net.bak
+      tags: lm27

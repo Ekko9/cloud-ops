@@ -1,0 +1,9 @@
+- name: ShangHai-CMS check status
+  hosts: "{{ service }}"
+  gather_facts: false
+  roles:
+    - {role: check_all, when: ('all' in service)}
+   # - {role: check_cms, when: ('cmsdata' in service)}
+   # - {role: check_software, when: ('software' in service)}
+#    - {role: check_redis, when: ('redis' in service)}
+   # - {role: check_cmszg, when: ('cmszg' in service)}

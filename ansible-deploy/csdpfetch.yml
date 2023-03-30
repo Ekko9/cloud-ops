@@ -1,0 +1,24 @@
+- name: "Copy CSDP module to ansible host"
+  hosts: "{{ service }}"
+  gather_facts: false
+  vars_files:
+    - apps.yml
+  tasks:
+  - name: "Compress {{ service }} profile"
+    shell: |
+      cd "{{ apps[service].dir }}/{{ apps[service].name }}"
+      tar -czf "{{ apps[service].name }}-{{ version }}.tar.gz" conf
+    ignore_errors: false
+
+  - name: "Copy {{ apps[service].name }}"  
+    fetch:
+      src: "{{ apps[service].dir }}/{{ apps[service].name }}/{{ apps[service].name }}-{{ version }}.tar.gz"
+      dest: "/opt/script/csdp/csdpbackup/"
+      flat: yes
+    ignore_errors: false
+
+  - name: "Delete {{ service }} profile"
+    file:
+      path: "{{ apps[service].dir }}/{{ apps[service].name }}/{{ apps[service].name }}-{{ version }}.tar.gz"
+      state: absent
+

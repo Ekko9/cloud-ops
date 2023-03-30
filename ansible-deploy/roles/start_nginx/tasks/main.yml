@@ -1,0 +1,5 @@
+- name: "Start nginx"
+  shell: |
+      "{{ apps[service].dir }}/sbin/nginx"
+  register: start_status
+  failed_when: start_status.rc != 0

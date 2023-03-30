@@ -1,0 +1,111 @@
+apps:
+   nginx:
+     name: html
+     dir: /usr/local/nginx
+     src: /opt/script/csdp/files/csdp.zip
+     dest: /tmp
+   file:
+     name: file_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/csdp/files/file_launcher-2.0-dev.zip
+     dest: /tmp
+   gateway:
+     name: api-gateway_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/csdp/files/api-gateway_launcher-2.0-dev.zip
+     dest: /tmp
+   datapush:
+     name: data-push_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/csdp/files/data-push_launcher-2.0-dev.zip
+     dest: /tmp 
+   patrol:
+     name: patrol_launcher-2.0-dev
+     dir: /home/csdp 
+     src: /opt/script/csdp/files/patrol_launcher-2.0-dev.zip
+     dest: /tmp
+   user:
+     name: user_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/csdp/files/user_launcher-2.0-dev.zip
+     dest: /tmp
+   order:
+     name: order_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/csdp/files/order_launcher-2.0-dev.zip
+     dest: /tmp
+   product:
+     name: product_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/csdp/files/product_launcher-2.0-dev.zip
+     dest: /tmp
+   workorder:
+     name: workOrder_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/csdp/files/workOrder_launcher-2.0-dev.zip
+     dest: /tmp
+   workflow:
+     name: workflow_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/csdp/files/workflow_launcher-2.0-dev.zip
+     dest: /tmp
+   resource:
+     name: resource_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/csdp/files/resource_launcher-2.0-dev.zip
+     dest: /tmp
+   upload:
+     name: upload_template_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/csdp/files/upload_template_launcher-2.0-dev.zip
+     dest: /tmp
+   backup:
+     name: backup_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/csdp/files/backup_launcher-2.0-dev.zip
+     dest: /tmp
+   datapump:
+     name: datapump_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/csdp/files/datapump_launcher-2.0-dev.zip
+     dest: /tmp
+   extract:
+     name: extract_launcher-2.0-dev
+     dir: /home/csdp  
+     src: /opt/script/csdp/files/extract_launcher-2.0-dev.zip
+     dest: /tmp
+   report:
+     name: report_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/csdp/files/report_launcher-2.0-dev.zip
+     dest: /tmp
+   statistic:
+     name: statistic_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/csdp/files/statistic_launcher-2.0-dev.zip
+     dest: /tmp
+   asset:
+     name: asset_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/csdp/files/asset_launcher-2.0-dev.zip
+     dest: /tmp
+   rack:
+     name: rack_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/csdp/files/rack_launcher-2.0-dev.zip
+     dest: /tmp
+   infraAsset:
+     name: infraAsset_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/csdp/files/infraAsset_launcher-2.0-dev.zip
+     dest: /tmp
+   message:
+     name: message_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/csdp/files/message_launcher-2.0-dev.zip
+     dest: /tmp
+   monitor:
+     name: monitor_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/csdp/files/monitor_launcher-2.0-dev.zip
+     dest: /tmp

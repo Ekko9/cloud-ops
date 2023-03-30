@@ -1,0 +1,12 @@
+- name: "Start {{ service }}"
+  shell: |
+       echo "" > "{{ apps[service].dir }}/{{ apps[service].name }}/bin/logs/log.log"
+       echo "" > "{{ apps[service].dir }}/{{ apps[service].name }}/bin/nohup.out"
+       nohup sh "{{ apps[service].dir }}/{{ apps[service].name }}/bin/run.sh" & tailf logs/log.log
+  register: start_status
+  failed_when: start_status.rc != 0
+  
+- name: "pring {{ service }} info"
+  debug:
+    msg: "start_status.stdout"
+

@@ -1,0 +1,14 @@
+---
+# Add sudo users
+- name: 添加日常管理用户.
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Add sudo user
+      user:
+        name: "{{ item.name }}"
+        password: "{{ item.password | password_hash('sha512') }}"
+        state: present
+        groups: wheel
+      with_items: "{{ ops_add_user }}"
+      tags: lm28

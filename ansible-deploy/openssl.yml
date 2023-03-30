@@ -1,0 +1,17 @@
+- name: "修复openssl漏洞"
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: "解压安装包"
+      shell: |
+           cd /usr/local
+           tar -xf openssl-1.1.1o.tar.gz
+           cd openssl-1.1.1o
+           ./config shared zlib
+           make 
+           make install
+           mv /usr/bin/openssl /usr/bin/openssl.bak.20220517.bak
+           rm -f /usr/lib64/openssl
+           ln -s /usr/local/openssl-1.1.1o/apps/openssl /usr/bin/openssl
+           ln -s /usr/local/openssl-1.1.1o/include/openssl/ /usr/lib64/openssl
+           ldconfig 

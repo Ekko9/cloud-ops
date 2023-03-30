@@ -1,0 +1,5 @@
+- name: "Stop nginx"
+  shell: |
+      sudo "{{ apps[service].dir }}/sbin/nginx" -s stop
+  register: stop_status
+  failed_when: stop_status.rc != 0

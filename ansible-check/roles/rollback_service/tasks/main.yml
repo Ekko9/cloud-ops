@@ -1,0 +1,10 @@
+- name: "Rollback {{ service }}"
+  shell: |
+      backup=$(sudo ls "{{ apps[service].dir }}" | grep "{{ apps[service].name }}.{{ version }}.bak")
+      if test ! -z "${backup}"; then
+         sudo cp -r "{{ apps[service].dir }}/{{ apps[service].name }}.{{ version }}.bak" "{{ apps[service].dir }}/{{ apps[service].name }}"
+      fi
+  register: rollback_status
+  failed_when: rollback_status.rc != 0
+
+

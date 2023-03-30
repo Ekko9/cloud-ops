@@ -1,0 +1,8 @@
+- name: "Start {{ service }}"
+  shell: |
+       sudo echo "" > "{{ apps[service].dir }}/{{ apps[service].name }}/bin/logs/log.log"
+       sudo echo "" > "{{ apps[service].dir }}/{{ apps[service].name }}/bin/nohup.out"
+       sudo nohup sh "{{ apps[service].dir }}/{{ apps[service].name }}/bin/run.sh"
+  register: start_status
+  failed_when: start_status.rc != 0
+

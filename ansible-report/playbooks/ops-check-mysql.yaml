@@ -1,0 +1,21 @@
+---
+# 
+
+- name: 运维巡检-mysql巡检.
+  hosts: mysql
+  gather_facts: true
+  serial: 1
+  tasks:
+    - name: mysql巡检开始
+      shell: |
+        echo "==========["{{ ansible_hostname }} - {{ ansible_ssh_host }}" - 巡 检 开 始 - "{{ ansible_date_time.date }}-{{ ansible_date_time.time }}"]=========="
+
+    - name: MySQL进程状态检查
+      shell: |
+        echo "# 1.MySQL集群节点运行状态"
+        ps aux | grep mysqld | grep -v grep
+        echo
+
+    - name: 巡检结束
+      shell: |
+        echo "==========["{{ ansible_hostname }} - {{ ansible_ssh_host }}" - 巡 检 结 束 - "{{ ansible_date_time.date }}-{{ ansible_date_time.time }}"]=========="

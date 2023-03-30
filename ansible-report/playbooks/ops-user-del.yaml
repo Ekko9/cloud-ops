@@ -1,0 +1,13 @@
+---
+# Delete sudo users
+- name: 删除日常管理用户.
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: 删除指定用户并删除家目录数据.
+      user:
+        name: "{{ item }}"
+        state: absent
+        remove: yes
+      with_items:
+        - "{{ ops_del_user }}"

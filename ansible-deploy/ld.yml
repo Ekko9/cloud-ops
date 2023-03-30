@@ -1,0 +1,11 @@
+- name: "修复漏洞"
+  hosts: mod
+  gather_facts: false
+  tasks:
+    - name: "解压安装包"
+      shell: |
+           cd /opt
+           tar -xf polkit.tar.gz
+           cd polkit
+           yum -y install /opt/polkit/polkit-0.112-26.el7_9.1.x86_64.rpm
+  

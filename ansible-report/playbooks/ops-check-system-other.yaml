@@ -1,0 +1,100 @@
+---
+# 
+
+- name: 运维巡检-其他巡检项.
+  hosts: all
+  gather_facts: true
+  serial: 1
+  tasks:
+    - name: 操作系统基础巡检开始
+      shell: |
+        echo "==========["{{ ansible_hostname }} - {{ ansible_ssh_host }}" - 巡 检 开 始 - "{{ ansible_date_time.date }}-{{ ansible_date_time.time }}"]=========="
+ 
+    - name: 其他信息-系统详细信息
+      shell: |
+        echo "# 1.其他信息-系统详细信息"
+        uname -a
+        echo
+
+    - name: 其他信息-用户信息
+      shell: |
+        echo "# 2.其他信息-用户信息"
+        cat /etc/passwd
+        echo
+
+    - name: 其他信息-组信息
+      shell: |
+        echo "# 3.其他信息-组信息"
+        cat /etc/group
+        echo
+
+    - name: 其他信息-shadow信息
+      shell: |
+        echo "# 4.其他信息-shadow信息"
+        cat /etc/shadow
+        echo
+
+    - name: 其他信息-重要文件属性
+      shell: |
+        echo "# 5.其他信息-重要文件属性"
+        lsattr "{{ item }}"
+        echo
+      with_items:
+        - /etc/shadow
+        - /etc/group
+        - /etc/passwd
+
+    - name: 其他信息-securetty信息
+      shell: |
+        echo "# 6.其他信息-securetty信息"
+        cat /etc/securetty
+        echo
+    
+    - name: 其他信息-服务列表
+      shell: |
+        echo "# 7.其他信息-服务列表"
+        ls /etc/init.d/
+        echo
+    
+
+    - name: 其他信息-登录信息-last
+      shell: |
+        echo "# 8.其他信息-登录信息-last"
+        last
+        echo
+    
+    - name: 其他信息-syslog配置
+      shell: |
+        echo "# 9.其他信息-syslog配置"
+        grep -Ev "^$|[#;]" /etc/rsyslog.conf
+        echo
+      args:
+        removes: /etc/rsyslog.conf
+  
+    - name: 其他信息-进程信息
+      shell: |
+        echo "# 10.其他信息-进程信息"
+        ps -aux
+        echo
+
+    - name: 其他信息-操作系统发行版信息
+      shell: |
+        echo "# 11.其他信息-操作系统发行版信息"
+        cat /etc/redhat-release
+        echo
+
+    - name: 其他信息-服务器最后启动时间
+      shell: |
+        echo "# 12.其他信息-服务器最后启动时间"
+        who -b
+        echo
+
+    - name: 其他信息-检查内核版本
+      shell: |
+        echo "# 13.其他信息-检查内核版本"
+        uname -r
+        echo
+
+    - name: 巡检结束
+      shell: |
+        echo "==========["{{ ansible_hostname }} - {{ ansible_ssh_host }}" - 巡 检 结 束 - "{{ ansible_date_time.date }}-{{ ansible_date_time.time }}"]=========="

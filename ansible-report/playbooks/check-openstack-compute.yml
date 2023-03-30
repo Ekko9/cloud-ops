@@ -1,0 +1,24 @@
+---
+
+- name: OpenStack计算节点服务器基本状态巡检.
+
+  hosts: compute
+  remote_user: root
+  gather_facts: yes
+  serial: 1
+  vars:
+  tasks:
+    - name: 巡检开始
+      shell: |
+        echo "==========["{{ ansible_hostname }} - {{ ansible_ssh_host }}" - 巡 检 开 始 - "{{ ansible_date_time.date }}-{{ ansible_date_time.time }}"]==========" 
+    - name: OpenStack服务状态巡检
+      shell: |
+        echo "OpenStack服务状态巡检"
+        openstack-service status
+        echo
+
+    - name: 巡检结束
+      shell: |
+        echo "==========["{{ ansible_hostname }} - {{ ansible_ssh_host }}" - 巡 检 结 束 - "{{ ansible_date_time.date }}-{{ ansible_date_time.time }}"]=========="
+
+

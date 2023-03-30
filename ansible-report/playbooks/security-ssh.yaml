@@ -1,0 +1,22 @@
+---
+# Linux服务器安全基线设置
+# 执行该任务前一定要确保有用户可以管理服务器并切换到root!!!
+
+- name: 服务器安全基线.
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: 检查是否禁止root用户远程登录(9)-检查是否禁止root用户远程ssh登录
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?PermitRootLogin'
+        line: 'PermitRootLogin no'
+        backup: yes
+        backrefs: yes
+      tags: lm9
+
+    - name: 重启相关服务.
+      service:
+        name: sshd
+        state: restarted
+      tags: lm99

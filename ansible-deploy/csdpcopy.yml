@@ -1,0 +1,23 @@
+- name: "Copy CSDP configuration file to backup host"
+  hosts: csdpbak
+  gather_facts: false
+  vars_files:
+    - csdpbak.yml
+  tasks:
+  - name: "Copy CSDP configuration file"
+    copy:
+      src: "{{ src }}/{{ version }}.tar.gz"
+      dest: "{{ dest }}"
+      backup: no
+    register: copy_status
+    failed_when: copy_status.changed != true
+
+  - name: "Check the configuration file"
+    stat:
+      path: "{{ dest }}/{{ version }}.tar.gz"
+    register: file_status
+
+  - name: "Output results"
+    debug:
+      msg: "scp succeeded: {{ dest }}/{{ version }}.tar.gz"
+    when: file_status.stat.exists == True

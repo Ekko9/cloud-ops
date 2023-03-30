@@ -1,0 +1,49 @@
+- name: "Upgrade CSDP JDK version"
+  hosts: mod
+  gather_facts: false
+  vars_files: 
+    - vars.yml
+  tasks:
+  - name: "Copy {{ filename }} to remote machine"
+    copy:
+      src: "{{ srcdir }}"
+      dest: "{{ destdir }}"
+      backup: no
+    
+  - name: "Check whether the file exists"
+    stat: 
+      path: "{{ destdir }}/{{ filename }}"
+    register: file_state
+  - name: "Check copy results"
+    debug:
+      msg:  "Transfer successful"
+    failed_when: file_state.stat.exists != True
+
+  - name: "Unzip the JDK package"
+    shell: | 
+        cd "{{ destdir }}"
+        tar -xf "{{ filename }}"
+        ls "{{ destdir }}" | grep "jdk-17.0.3.1"
+    register: unzip_state
+  - name: "Check decompression status"
+    debug:
+      msg: "{{ unzip_state.stdout }}"
+    failed_when: unzip_state.stdout == ""
+ 
+  - name: "Replace the old JDK version"
+    lineinfile:
+      path: "{{ profile }}"
+      backup: yes
+      regexp: "^JAVA_HOME"
+      line: "JAVA_HOME={{ jdkdir }}"
+    ignore_errors: false
+
+  - name: "Execute java -version"
+    shell: |
+        source "{{ profile }}"
+        java -version
+    register: jdk_version
+  - name: "Output JDK version"
+    debug:
+      msg: "{{ jdk_version.stderr_lines }}"
+    failed_when: jdk_version.rc != 0

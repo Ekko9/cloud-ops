@@ -1,0 +1,6 @@
+- name: "Update {{ service }}"
+  shell: |
+      cd "{{ apps[service].dest }}/{{ service }}/{{ apps[service].name }}"
+      sudo mv "{{ apps[service].dest }}/{{ service }}/{{ apps[service].name }}/lib" "{{ apps[service].dir }}/{{ apps[service].name }}"
+  register: update_status
+  failed_when: update_status.rc != 0

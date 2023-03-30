@@ -1,0 +1,111 @@
+apps:
+   nginx:
+     name: html
+     dir: /usr/local/nginx
+     src: /opt/script/ansible/update331/csdp.zip
+     dest: /tmp
+   file:
+     name: file_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/ansible/update331/file_launcher-2.0-dev.zip
+     dest: /tmp
+   gateway:
+     name: api-gateway_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/ansible/update331/api-gateway_launcher-2.0-dev.zip
+     dest: /tmp
+   datapush:
+     name: data-push_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/ansible/update331/data-push_launcher-2.0-dev.zip
+     dest: /tmp 
+   patrol:
+     name: patrol_launcher-2.0-dev
+     dir: /home/csdp 
+     src: /opt/script/ansible/update331/patrol_launcher-2.0-dev.zip
+     dest: /tmp
+   user:
+     name: user_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/ansible/update331/user_launcher-2.0-dev.zip
+     dest: /tmp
+   order:
+     name: order_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/ansible/update331/order_launcher-2.0-dev.zip
+     dest: /tmp
+   product:
+     name: product_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/ansible/update331/product_launcher-2.0-dev.zip
+     dest: /tmp
+   workorder:
+     name: workOrder_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/ansible/update331/workOrder_launcher-2.0-dev.zip
+     dest: /tmp
+   workflow:
+     name: workflow_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/ansible/update331/workflow_launcher-2.0-dev.zip
+     dest: /tmp
+   resource:
+     name: resource_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/ansible/update331/resource_launcher-2.0-dev.zip
+     dest: /tmp
+   upload:
+     name: upload_template_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/ansible/update331/upload_template_launcher-2.0-dev.zip
+     dest: /tmp
+   backup:
+     name: backup_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/ansible/update331/backup_launcher-2.0-dev.zip
+     dest: /tmp
+   datapump:
+     name: datapump_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/ansible/update331/datapump_launcher-2.0-dev.zip
+     dest: /tmp
+   extract:
+     name: extract_launcher-2.0-dev
+     dir: /home/csdp  
+     src: /opt/script/ansible/update331/extract_launcher-2.0-dev.zip
+     dest: /tmp
+   report:
+     name: report_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/ansible/update331/report_launcher-2.0-dev.zip
+     dest: /tmp
+   statistic:
+     name: statistic_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/ansible/update331/statistic_launcher-2.0-dev.zip
+     dest: /tmp
+   asset:
+     name: asset_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/ansible/update331/asset_launcher-2.0-dev.zip
+     dest: /tmp
+   rack:
+     name: rack_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/ansible/update331/rack_launcher-2.0-dev.zip
+     dest: /tmp
+   infraAsset:
+     name: infraAsset_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/ansible/update331/infraAsset_launcher-2.0-dev.zip
+     dest: /tmp
+   message:
+     name: message_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/ansible/update331/message_launcher-2.0-dev.zip
+     dest: /tmp
+   monitor:
+     name: monitor_launcher-2.0-dev
+     dir: /home/csdp
+     src: /opt/script/ansible/update331/monitor_launcher-2.0-dev.zip
+     dest: /tmp

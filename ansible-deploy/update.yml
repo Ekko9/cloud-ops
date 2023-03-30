@@ -1,0 +1,12 @@
+- name: "Shanghai CSDP Module update"
+  hosts: "{{ service }}"
+  gather_facts: false
+  vars_files:
+    - apps.yml
+  roles:
+    - { role: backup_service, tags: ["backup"] }
+   # - { role: stop_service, tags: ["stopapp"] }
+    - { role: scp_files, tags: ["scp"] }
+    - { role: update_service, tags: ["updateapp"] }
+   # - { role: start_service, tags: ["startapp"] }
+    - { role: check_port, tags: ["check"] }

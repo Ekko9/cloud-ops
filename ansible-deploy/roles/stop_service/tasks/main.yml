@@ -1,0 +1,18 @@
+- name: "Stop {{ service }}"
+  shell: |
+      pid=$(ps -ef | grep -w "{{ service }}" | grep -v grep | awk '{print $2}')
+      kill -9 ${pid}
+  register: stop_status
+  failed_when: stop_status.rc != 0
+
+- name: "Check {{ service }} pid"
+  shell: |
+      pid=$(ps -ef | grep -w "{{ service }}" | grep -v grep | awk '{print $2}')
+      echo ${pid}
+  register: pid
+
+- name: "print {{ service }} pid"
+  debug:
+    msg: "{{ pid.stdout }}"
+  when: pid.stdout != ""
+

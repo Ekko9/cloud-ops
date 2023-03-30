@@ -1,0 +1,11 @@
+- name: "Check {{ service }} pid"
+  shell: |
+      pid=$(ps -ef | grep -w "{{ service }}" | grep -v grep | awk '{print $2}')
+      echo ${pid}
+  register: pid
+  
+- name: "print {{ service }} pid"
+  debug:
+    msg: "{{ pid.stdout }}"
+  when: pid.stdout != ""
+

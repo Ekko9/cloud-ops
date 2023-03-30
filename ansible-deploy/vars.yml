@@ -1,0 +1,6 @@
+srcdir: /opt/script/csdp/files/jdk-17_linux-x64_bin.tar.gz
+destdir: /usr/java
+filename: jdk-17_linux-x64_bin.tar.gz
+jdkdir: /usr/java/jdk-17.0.3.1
+profile: /etc/profile
+

@@ -1,0 +1,80 @@
+---
+
+- name: OpenStack控制节点服务器基本状态巡检.
+
+  hosts: controller
+  remote_user: root
+  gather_facts: yes
+  serial: 1
+  vars:
+  tasks:
+    - name: 巡检开始
+      shell: |
+        echo "==========["{{ ansible_hostname }} - {{ ansible_ssh_host }}" - 巡 检 开 始 - "{{ ansible_date_time.date }}-{{ ansible_date_time.time }}"]=========="
+
+    - name: OpenStack服务状态巡检
+      shell: |
+        echo "OpenStack服务状态巡检"
+        openstack-service status
+        echo
+
+    - name: 巡检结束
+      shell: |
+        echo "==========["{{ ansible_hostname }} - {{ ansible_ssh_host }}" - 巡 检 结 束 - "{{ ansible_date_time.date }}-{{ ansible_date_time.time }}"]==========" 
+
+- name: 云平台基础服务状态检查.
+  hosts: controller01
+  remote_user: root
+  gather_facts: yes
+  vars:
+  tasks:
+    - name: 巡检开始
+      shell: |
+        echo "==========["{{ ansible_hostname }} - {{ ansible_ssh_host }}" - 巡 检 开 始 - "{{ ansible_date_time.date }}-{{ ansible_date_time.time }}"]=========="
+    - name: 云平台服务状态检查
+      shell: |
+        echo "=========MySQL集群状态检查========="
+        echo
+        echo "MySQL集群节点运行状态"
+        mysql -e "show status" | grep wsrep_incoming_address
+        echo
+        echo "MySQL集群节点同步状态"
+        mysql -e "show status" | grep wsrep_local_state_comment
+        mysql -e "show status" | grep wsrep_ready
+        echo
+
+        echo "=========RabbitMQ集群状态检查========="
+        echo
+        rabbitmqctl cluster_status
+        echo
+
+        echo "=========Nova组件状态检查========="
+        echo
+        source /root/openrc
+        nova service-list
+        echo
+
+        echo "=========Neutron组件状态检查========="
+        echo
+        neutron agent-list
+        echo
+
+        echo "=========Cinder组件状态检查========="
+        echo
+        cinder service-list
+        echo
+
+        echo "=========Haproxy组件状态检查========="
+        echo
+        echo "show stat" | socat stdio /var/lib/haproxy/stats
+        echo
+
+        echo "=========Pacemaker组件状态检查========="
+        echo
+        crm status
+        echo
+
+    - name: 巡检结束
+      shell: |
+        echo "==========["{{ ansible_hostname }} - {{ ansible_ssh_host }}" - 巡 检 结 束 - "{{ ansible_date_time.date }}-{{ ansible_date_time.time }}"]=========="
+      

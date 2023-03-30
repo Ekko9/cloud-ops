@@ -1,0 +1,20 @@
+---
+# 
+
+- name: 运维巡检-服务巡检.
+  hosts: "{{ service }}"
+  gather_facts: true
+  tasks:
+    - name: 服务巡检开始
+      shell: |
+        echo "==========["{{ ansible_hostname }} - {{ ansible_ssh_host }}" - 巡 检 开 始 - "{{ ansible_date_time.date }}-{{ ansible_date_time.time }}"]=========="
+ 
+    - name: "服务巡检-{{ service }}"
+      shell: |
+        echo "# 服务巡检-{{ service }}"
+        ps -ef | grep "{{ service }}"
+        echo
+        
+    - name: 巡检结束
+      shell: |
+        echo "==========["{{ ansible_hostname }} - {{ ansible_ssh_host }}" - 巡 检 结 束 - "{{ ansible_date_time.date }}-{{ ansible_date_time.time }}"]=========="
