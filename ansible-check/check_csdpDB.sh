@@ -56,13 +56,13 @@ start_time=$(date +'%Y-%m-%d %H:%M:%S')
 
 log_info " 检查数据库状态，开始时间：${start_time} "
 log_info "******************** DB1 ********************"
-ansible -i csdp.bak mysql1 -m shell -a "date&&mysql  -N -e "status" -uroot -pAKR80YB0u0@ctsi"
+ansible -i csdp.bak mysql1 -m shell -a "date&&mysql  -N -e "status" -u -p"
 
 log_info "******************** DB2 ********************"
-ansible -i csdp.bak mysql2 -m shell -a "date&&mysql  -N -e "status" -uroot -pAKR80YB0u0@ctsi"
+ansible -i csdp.bak mysql2 -m shell -a "date&&mysql  -N -e "status" -u -p"
 
 log_info "******************** 从节点状态 ********************"
-ansible -i csdp.bak mysql2 -m shell -a "date && mysql -e 'show slave status \G' -uroot -pAKR80YB0u0@ctsi |grep Running"
+ansible -i csdp.bak mysql2 -m shell -a "date && mysql -e 'show slave status \G' -u -p |grep Running"
 
 end_time=$(date +'%Y-%m-%d %H:%M:%S')
 start_seconds=$(date --date="$start_time" +%s)
